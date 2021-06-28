@@ -1,10 +1,12 @@
 package com.splitwise.repositories;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 import com.splitwise.exceptions.UserAlreadyExistsException;
+import com.splitwise.exceptions.UserNotFoundException;
 import com.splitwise.model.User;
 
 public class UserInMemoryRepository implements IUserRepo{
@@ -14,16 +16,26 @@ public class UserInMemoryRepository implements IUserRepo{
 	
 	
 	public User findById(Long id) {
-		return null;
+		return idToUserMap.get(id);
 	}
 	
 	public User findByUserName(String userName) {
-		return null;
+		return userNametoUserMap.get(userName);
 	}
 
 	@Override
 	public Set<User> getUsers(List<String> participants) {
-		// TODO Auto-generated method stub
+		Set<User> users = new HashSet<User>();
+		for(String participant : participants) {
+			if(isUserPresent(participant)) {
+				users.add(findByUserName(participant));
+			}
+			else {
+				throw new UserNotFoundException("User with username "+
+			participant +
+			"does not exists in the records.");
+			}
+		}
 		return null;
 	}
 
