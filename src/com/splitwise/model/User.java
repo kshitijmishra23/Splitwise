@@ -53,6 +53,16 @@ public class User extends AuditableEntity{
 		return userJson.toString();
 		
 	}
+
+	public void addExpense(Expense expense) {
+		this.expenses.add(expense);
+		
+	}
+
+	public void addGroup(Group group) {
+		this.groups.add(group);
+		
+	}
 	
 	
 	
