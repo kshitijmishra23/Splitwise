@@ -6,7 +6,7 @@ import java.util.Set;
 import com.splitwise.model.User;
 
 public interface IUserRepo {
-	 User findById(String id);
+	 User findById(Long id);
 	 User findByUserName(String userName);
 	 Set<User> getUsers(List<String> participants);
 }

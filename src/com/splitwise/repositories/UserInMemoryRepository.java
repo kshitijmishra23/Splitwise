@@ -8,11 +8,11 @@ import com.splitwise.model.User;
 
 public class UserInMemoryRepository implements IUserRepo{
 	
-	HashMap<String, User> idToUserMap;
+	HashMap<Long, User> idToUserMap;
 	HashMap<String, User> userNametoUserMap;
 	
 	
-	public User findById(String id) {
+	public User findById(Long id) {
 		return null;
 	}
 	
