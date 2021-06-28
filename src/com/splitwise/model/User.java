@@ -4,7 +4,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User extends AuditableEntity{
-	private static Long ID = 0L;
+	private static Long ID = 1L;
 	private String userName;
 	private String phNumber;
 	
@@ -45,6 +45,14 @@ public class User extends AuditableEntity{
 		return groups;
 	}
 	
+	public String toString() {
+		StringBuilder userJson = new StringBuilder();
+		userJson.append("ID: "+this.getId()+'\n');
+		userJson.append("Username: "+this.userName+'\n');
+		userJson.append("ph Number: "+this.phNumber);
+		return userJson.toString();
+		
+	}
 	
 	
 	
