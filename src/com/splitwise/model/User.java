@@ -3,9 +3,9 @@ package com.splitwise.model;
 import java.util.HashSet;
 import java.util.Set;
 
-public class User {
-	
-	private String name;
+public class User extends AuditableEntity{
+	private static Long ID = 0L;
+	private String userName;
 	private String phNumber;
 	
 	//Store the salted hashed password
@@ -15,22 +15,21 @@ public class User {
 	private Set<Group> groups;
 	
 	public User(String name, String phNo, String password) {
-		this.name = name;
+		super(ID++);
+		this.userName = name;
 		this.phNumber = phNo;
 		//don't directly store it
 		
 		this.password = password;
 		this.expenses = new HashSet<Expense>();
 		this.groups = new HashSet<Group>();
+	}	
+	
+	public String getUserName() {
+		return userName;
 	}
-	
-	
-	
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
+	public void setUserName(String name) {
+		this.userName = name;
 	}
 	public String getPhNumber() {
 		return phNumber;
