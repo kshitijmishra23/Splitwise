@@ -19,7 +19,7 @@ public class ExpenseController {
 			String name, 
 			String description,
 			List<String> participants,
-			String createdById,
+			Long createdById,
 			Double amount,
 			SplitStrategy splitStrategy,
 			Date date) {
