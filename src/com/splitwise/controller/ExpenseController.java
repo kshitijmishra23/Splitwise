@@ -26,14 +26,14 @@ public class ExpenseController {
 		
 		
 		User currentUser = userRepo.findById(createdById);
-		//if user is not registered => UserNotFound;
 		
-		//check for every id in the participants list as well
+		
+		
 		Set<User> participantUsers = userRepo.getUsers(participants);
 		
 		Expense expense = new Expense (date, currentUser, participantUsers, name, description);
 		splitStrategy.calculatePaidAmount(expense);
-		return null;
+		return expense;
 		
 	}
 	

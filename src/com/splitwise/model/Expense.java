@@ -4,21 +4,30 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Set;
 
-public class Expense {
+public class Expense extends AuditableEntity{
+	private static Long ID = 0L;
+	private String name;
+	private String description;
 	
-	String name;
-	String description;
+	private User createdBy;
+	private Set<User> participants;
 	
-	User createdBy;
-	Set<User> participants;
+	private Double totalAmount;
 	
-	Double totalAmount;
+	private HashMap<User, Double> amountPaid;
+	private HashMap<User, Double> amountOwned;
 	
-	HashMap<User, Double> amountPaid;
-	HashMap<User, Double> amountOwned;
 	
-	public Expense(Date date, User currentUser, Set<User> participantUsers, String name2, String description2) {
-		// TODO Auto-generated constructor stub
+	public Expense(Long id, String name, String description, User createdBy, Set<User> participants, Double totalAmount,
+			HashMap<User, Double> amountPaid, HashMap<User, Double> amountOwned) {
+		super(ID++);
+		this.name = name;
+		this.description = description;
+		this.createdBy = createdBy;
+		this.participants = participants;
+		this.totalAmount = totalAmount;
+		this.amountPaid = amountPaid;
+		this.amountOwned = amountOwned;
 	}
 	public String getName() {
 		return name;
