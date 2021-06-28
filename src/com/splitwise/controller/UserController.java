@@ -14,7 +14,6 @@ public class UserController {
 	
 	public User registerUser(String userName, String password, String phNo) {
 		User user = userRepository.saveUser(userName, password, phNo);
-		
 		return user;
 	
 	}
