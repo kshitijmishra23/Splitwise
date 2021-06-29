@@ -14,9 +14,12 @@ public class SelfPayPaymentStrategy implements PaymentStrategy {
 		Double amountPaid = expense.getTotalAmount();
 		for(User participant : participants) {
 			if(participant.equals(payer)) {
-				expense.getAmountPaid().put(payer, amountPaid);
+				System.out.println("Payer is :"+payer.getUserName()+" "+amountPaid);
+				
+				expense.getAmountPaid().put(participant, amountPaid);
+				System.out.println("Amount === "+expense.getAmountPaid().get(payer));
 			}else {
-				expense.getAmountPaid().put(payer, 0.0);
+				expense.getAmountPaid().put(participant, 0.0);
 			}
 		}
 	}
