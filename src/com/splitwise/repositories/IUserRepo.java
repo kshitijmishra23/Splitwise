@@ -10,6 +10,6 @@ public interface IUserRepo {
 	 User findByUserName(String userName);
 	 Set<User> getUsers(List<String> participants);
 	 boolean isUserPresent(String userName);
-	 User saveUser(User u);
-	User saveUser(String userName, String password, String phNo);
+	 void saveUser(User u);
+	 User saveUser(String userName, String password, String phNo);
 }
