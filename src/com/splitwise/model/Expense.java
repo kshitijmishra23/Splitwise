@@ -2,6 +2,7 @@ package com.splitwise.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Set;
 
 public class Expense extends AuditableEntity{
@@ -17,21 +18,19 @@ public class Expense extends AuditableEntity{
 	private HashMap<User, Double> amountPaid;
 	private HashMap<User, Double> amountOwned;
 	private Date date;
+	private Group group;
 	
-	
-	public Expense(String name, String description, User createdBy, Set<User> participants, Double totalAmount) {
+	public Expense(String name, String description, User createdBy, Double totalAmount) {
 		super(ID++);
 		this.name = name;
 		this.description = description;
 		this.createdBy = createdBy;
-		this.participants = participants;
 		this.totalAmount = totalAmount;
 		this.amountPaid =  new HashMap<User, Double>();
 		this.amountOwned = new HashMap<User, Double>();
 		this.date = new Date();
-		for(User participant : participants) {
-			participant.addExpense(this);
-		}
+		this.participants = new HashSet<User>();
+		
 	
 	}
 	public String getName() {
@@ -55,8 +54,17 @@ public class Expense extends AuditableEntity{
 	public Set<User> getParticipants() {
 		return participants;
 	}
+	
 	public void setParticipants(Set<User> participants) {
 		this.participants = participants;
+		for(User participant : participants) {
+			participant.addExpense(this);
+		}
+		
+	}
+	public void addParticipant(User user) {
+		this.participants.add(user);
+		user.addExpense(this);
 	}
 	public Double getTotalAmount() {
 		return totalAmount;
@@ -76,7 +84,28 @@ public class Expense extends AuditableEntity{
 	public void setAmountOwned(HashMap<User, Double> amountOwned) {
 		this.amountOwned = amountOwned;
 	}
-	
+	public Group getGroup() {
+		return group;
+	}
+	public void setGroup(Group group) {
+		this.group = group;
+		group.addExpense(this);
+	}
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Name: "+this.name+"\n");
+		sb.append("Description: "+this.description+"\n");
+		sb.append("CreatedBy: "+this.createdBy.getUserName()+"\n");
+		sb.append("Paid amount:\n");
+		for(User user : this.amountPaid.keySet()) {
+			sb.append(user.getUserName()+"::"+this.amountPaid.get(user)+"\n");
+		}
+		sb.append("Owned amount:\n");
+		for(User user : this.amountOwned.keySet()) {
+			sb.append(user.getUserName()+"::"+this.amountOwned.get(user)+"\n");
+		}
+		return sb.toString();
+	}
 	
 
 }
