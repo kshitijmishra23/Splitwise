@@ -14,6 +14,10 @@ public class UserInMemoryRepository implements IUserRepo{
 	HashMap<Long, User> idToUserMap;
 	HashMap<String, User> userNametoUserMap;
 	
+	public UserInMemoryRepository() {
+		idToUserMap = new HashMap<Long, User>();
+		userNametoUserMap = new HashMap<String, User>();
+	}
 	
 	public User findById(Long id) {
 		return idToUserMap.get(id);
@@ -45,9 +49,9 @@ public class UserInMemoryRepository implements IUserRepo{
 	}
 
 	@Override
-	public User saveUser(User u) {
+	public void saveUser(User u) {
 		// TODO Auto-generated method stub
-		return null;
+		return;
 	}
 
 	@Override
@@ -59,6 +63,8 @@ public class UserInMemoryRepository implements IUserRepo{
 		}
 		User user = new User(userName, password, phNo);
 		indexUser(user);
+		System.out.println("User added: ");
+		System.out.println(user.toString());
 		return user;
 	}
 
