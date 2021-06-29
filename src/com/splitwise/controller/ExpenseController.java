@@ -56,6 +56,8 @@ public class ExpenseController {
 		
 		Expense expense = new Expense(name, description, createdBy, participantUsers, amount);
 		splitStrategy.calculatePaidAmount(expense);
+		System.out.println("Expense added:");
+		System.out.println(expense.toString());
 		return expense;
 		
 	}
