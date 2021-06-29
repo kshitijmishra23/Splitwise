@@ -40,7 +40,7 @@ public class UserInMemoryRepository implements IUserRepo{
 			"does not exists in the records.");
 			}
 		}
-		return null;
+		return users;
 	}
 
 	@Override
